@@ -3,7 +3,6 @@
 #include<string>
 using namespace std;
 
-int count_digits(int number);
 int get_fibonacci_last_digit(int number);
 int get_mod(long long number);
 
@@ -11,17 +10,6 @@ int main() {
     int number = 0;
     cin >> number;
     cout << get_fibonacci_last_digit(number);
-}
-
-int count_digits(int number) {
-    
-    int counter = 0;
-    while(number != 0) {
-        number = number / 10;
-        ++counter;
-    }
-
-    return counter;
 }
 
 int get_mod(long long number) {
