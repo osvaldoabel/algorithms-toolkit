@@ -1,5 +1,5 @@
 
-void inicializaD(GRAGO *g, int *d, int *p, int s)
+void inicializaD(GRAPH *g, int *d, int *p, int s)
 {
     int v;
     for (v = 0; v < g->vertices; v++) {
@@ -11,7 +11,7 @@ void inicializaD(GRAGO *g, int *d, int *p, int s)
 }
 
 void relaxa(GRAPH *g, int *d, int *p, int *u, int v ) {
-    ADJACENCY *ad = g->adj[u].cab;
+    ADJACENCY *ad = g->adj[u].head;
 
     while(ad && ad->vertice != v) {
         ad = ad->prox;
@@ -37,10 +37,10 @@ int *dijkstra(GRAPH *g, int s)
         opened[i] = true;
 
     while(isThereOpen(g, opened)) {
-        int u = menorDist(g, opened, d);
+        int u = lowerDistance(g, opened, d);
         opened[u] = false;
         
-        ADJACENCY *ad = g->adj[u].cab;
+        ADJACENCY *ad = g->adj[u].head;
         while(ad) {
             relaxa(g, d, p, ad->vertice);
             ad = ad->prox;
@@ -58,7 +58,7 @@ bool isThereOpen(GRAPH *g, int *aberto)
     return(false)    ;
 }
 
-int menorDist(GRAPH *g, *aberto, int *d)
+int lowerDistance(GRAPH *g, *aberto, int *d)
 {
     for (int i=0; i <g->vertice; i++)
         if (aberto[i]) break;
